@@ -48,20 +48,23 @@
     </header>
 
     <main class="container">
-        <section class="data-container"></section>
-    </main>
-    <template class="data-template">
-        <article class="ret">
+        <section class="data-container">
+            <article class="ret">
             <h2></h2>
             <img src="" alt=""><br>
             <a class="data-navn" href=""></a><br>
-            <span class="data-kortbeskrivelse"></span><br>
+            <span class="data-langbeskrivelse"></span><br>
             pris: <span class="data-pris"></span><br>
             <span class="data-kategori"></span><br>
         </article>
-    </template>
+        </section>
+    </main>
 
     <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get("id");
+        console.log("id");
+
         let dest = document.querySelector(".data-container"),
             retter, kategoriFilter = "alle";
         document.addEventListener("DOMContentLoaded", hentJson);
@@ -83,20 +86,15 @@
         }
 
         function visRetter() {
-            let dest = document.querySelector(".data-container"),
-                temp = document.querySelector(".data-template");
-                document.querySelector("header h1").textContent = kategoriFilter;
+            let dest = document.querySelector(".data-container");
+
             retter.forEach(ret => {
-                if (ret.kategori==kategoriFilter || kategoriFilter=="alle"){
-                let klon = temp.cloneNode(true).content;
-                klon.querySelector("h2").textContent = ret.navn;
-                klon.querySelector("img").src = "imgs/small/" + ret.billede + "-sm.jpg";
-                klon.querySelector("img").addEventListener("click", ()=>{
-                    window.location.href="indexSingle.html?id=" + ret.id;
-                })
-                klon.querySelector(".data-kortbeskrivelse").textContent = ret.kortbeskrivelse;
-                klon.querySelector(".data-pris").textContent = ret.pris + ",-";
-                dest.appendChild(klon);
+                if (ret.id == id) {
+                console.log(dest.querySelector("h2"));
+                dest.querySelector("h2").textContent = ret.navn;
+                dest.querySelector("img").src = "imgs/medium/" + ret.billede + "-md.jpg";
+                dest.querySelector(".data-langbeskrivelse").textContent = ret.langbeskrivelse;
+                dest.querySelector(".data-pris").textContent = ret.pris + ",-";
                 }
             })
         }
