@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Babushka</title>
+    <style>
+        body {
+            background-color: rgb(240, 240, 240);
+            margin: 0;
+        }
+
+        article {
+            padding: 1em;
+            background-color: white;
+        }
+
+        .data-container article img {
+            width: 100%;
+        }
+
+        .data-container {
+            margin: 0 auto;
+            display: grid;
+        }
+
+        .modal-billede {
+            width: 70%;
+        }
+
+        @media screen and (min-width:580px) {
+            .data-container {
+                padding-left: 10%;
+                padding-right: 10%;
+                grid-gap: 5px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        #modal {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 1s;
+            background-color: rgba(0, 0, 0, .7);
+            top: 0;
+        }
+
+        #modal-content {
+            width: 73vw;
+            margin: auto;
+            background-color: rgba(250, 2550, 250, 1);
+        }
+
+        #modal.vis {
+            display: block;
+            opacity: 1;
+            pointer-events: all;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1></h1>
+        <nav>
+            <button class="menu-item" data-kategori="alle">alle</button>
+            <button class="menu-item" data-kategori="forretter">forretter</button>
+            <button class="menu-item" data-kategori="hovedretter">hovedretter</button>
+            <button class="menu-item" data-kategori="desserter">desserter</button>
+            <button class="menu-item" data-kategori="drikkevarer">drikkevarer</button>
+        </nav>
+    </header>
+
+    <section id="modal">
+        <button>luk</button>
+        <div id="modal-content">
+            <h2 class="modal-navn"></h2>
+            <img class="modal-billede" src="" alt="">
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="data-container"></section>
+    </main>
+    <template class="data-template">
+        <article class="ret">
+            <h2></h2>
+            <img src="" alt=""><br>
+            <a class="data-navn" href=""></a><br>
+            <span class="data-kortbeskrivelse"></span><br>
+            pris: <span class="data-pris"></span><br>
+            <span class="data-kategori"></span><br>
+        </article>
+    </template>
+
+    <script>
+        let modal = document.querySelector("#modal");
+
+        let dest = document.querySelector(".data-container"),
+            retter, kategoriFilter = "alle";
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        async function hentJson() {
+            let myJson = await fetch("menu.json");
+            retter = await myJson.json();
+            visRetter();
+        }
+
+        document.querySelectorAll(".menu-item").forEach(knap => {
+            knap.addEventListener("click", filtrering)
+        });
+
+        function filtrering() {
+            dest.textContent = "";
+            kategoriFilter = this.getAttribute("data-kategori");
+            visRetter();
+        }
+
+        function visRetter() {
+            let dest = document.querySelector(".data-container"),
+                temp = document.querySelector(".data-template");
+            document.querySelector("header h1").textContent = kategoriFilter;
+            retter.forEach(ret => {
+                if (ret.kategori == kategoriFilter || kategoriFilter == "alle") {
+                    let klon = temp.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = ret.navn;
+                    klon.querySelector("img").src = "imgs/small/" + ret.billede + "-sm.jpg";
+                    klon.querySelector("img").addEventListener("click", () => {
+                        visModal(ret);
+                    });
+                    klon.querySelector(".data-kortbeskrivelse").textContent = ret.kortbeskrivelse;
+                    klon.querySelector(".data-pris").textContent = ret.pris + ",-";
+                    klon.querySelector(".data-kategori").textContent = ret.kategori;
+                    dest.appendChild(klon);
+                }
+            })
+        }
+
+        function visModal(retten) {
+            modal.classList.add("vis");
+            modal.querySelector(".modal-navn").textContent = retten.navn;
+            modal.querySelector(".modal-billede").alt = "Foto af " + retten.navn;
+            modal.querySelector(".modal-billede").src = "imgs/medium/" + retten.billede + "-md.jpg";
+            modal.querySelector("button").addEventListener("click", skjulModal);
+        }
+
+        function skjulModal() {
+            modal.classList.remove("vis");
+        }
+    </script>
+
+</body>
+
+</html>
