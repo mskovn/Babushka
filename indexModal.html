@@ -51,6 +51,14 @@
             top: 0;
         }
 
+        .modal-beskrivelse {
+            text-align: left;
+        }
+
+        .modal-pris {
+            text-align: left;
+        }
+
         #modal-content {
             width: 73vw;
             margin: auto;
@@ -83,6 +91,8 @@
         <div id="modal-content">
             <h2 class="modal-navn"></h2>
             <img class="modal-billede" src="" alt="">
+            <div class="modal-beskrivelse"></div>
+            <div class="modal-pris"></div>
         </div>
     </section>
 
@@ -148,6 +158,8 @@
             modal.querySelector(".modal-navn").textContent = retten.navn;
             modal.querySelector(".modal-billede").alt = "Foto af " + retten.navn;
             modal.querySelector(".modal-billede").src = "imgs/medium/" + retten.billede + "-md.jpg";
+            modal.querySelector(".modal-beskrivelse").textContent = retten.langbeskrivelse;
+            modal.querySelector(".modal-pris").textContent = retten.pris + ",-";
             modal.querySelector("button").addEventListener("click", skjulModal);
         }
 
