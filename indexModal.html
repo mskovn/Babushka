@@ -5,9 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
-   <link href="https://fonts.googleapis.com/css?family=Montserrat:300i,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300i,400" rel="stylesheet">
     <style>
-
         body {
             background-color: rgb(240, 240, 240);
         }
@@ -15,6 +14,23 @@
         article {
             background-color: white;
             padding: 5px;
+        }
+
+        button {
+            background-color: coral;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-bottom: 3%;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: chocolate;
         }
 
         h2 {
@@ -117,13 +133,12 @@
             }
 
         }
-
     </style>
 </head>
 
 <body>
     <header>
-        <h1></h1>
+
         <nav>
             <button class="menu-item" data-kategori="alle">alle</button>
             <button class="menu-item" data-kategori="forretter">forretter</button>
@@ -131,6 +146,7 @@
             <button class="menu-item" data-kategori="desserter">desserter</button>
             <button class="menu-item" data-kategori="drikkevarer">drikkevarer</button>
         </nav>
+        <h2></h2>
     </header>
 
     <section id="modal">
@@ -183,7 +199,7 @@
         function visRetter() {
             let dest = document.querySelector(".data-container"),
                 temp = document.querySelector(".data-template");
-            document.querySelector("header h1").textContent = kategoriFilter;
+            document.querySelector("header h2").textContent = kategoriFilter;
             retter.forEach(ret => {
                 if (ret.kategori == kategoriFilter || kategoriFilter == "alle") {
                     let klon = temp.cloneNode(true).content;
