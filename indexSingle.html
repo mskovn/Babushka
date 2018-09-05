@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:300i,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
     <style>
         body {
             background-color: rgb(240, 240, 240);
@@ -13,6 +15,25 @@
         article {
             padding: 1em;
             background-color: white;
+        }
+
+                h1{
+            font-family: 'Dancing Script', cursive;
+            color: coral;
+            text-align: center;
+            font-size: 75px;
+        }
+
+        h2 {
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            letter-spacing: .5px;
+        }
+
+         header {
+            margin-left: 10%;
+            margin-right: 10%;
         }
 
         .data-container article img {
@@ -24,28 +45,53 @@
             display: grid;
         }
 
+            .data-pris {
+            bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .data-langbeskrivelse {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            letter-spacing: .5px;
+        }
+
+        button {
+            background-color: coral;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-bottom: 2%;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+           button:hover {
+            background-color: chocolate;
+        }
 
         @media screen and (min-width:580px) {
             .data-container {
-                padding-left: 10%;
-                padding-right: 10%;
+                padding-left: 20%;
+                padding-right: 20%;
                 grid-gap: 5px;
                 grid-template-columns: repeat(1, 1fr);
             }
-
 
     </style>
 </head>
 
 <body>
     <header>
-        <h1></h1>
+        <h1>Bistro Babushka</h1>
         <nav>
-            <button class="menu-item" data-kategori="alle">alle</button>
-            <button class="menu-item" data-kategori="forretter">forretter</button>
-            <button class="menu-item" data-kategori="hovedretter">hovedretter</button>
-            <button class="menu-item" data-kategori="desserter">desserter</button>
-            <button class="menu-item" data-kategori="drikkevarer">drikkevarer</button>
+            <button onclick="tilbage()">Tilbage</button>
         </nav>
     </header>
 
@@ -55,8 +101,8 @@
             <h2></h2>
             <img src="" alt=""><br>
             <a class="data-navn" href=""></a><br>
-            <span class="data-langbeskrivelse"></span><br>
-            pris: <span class="data-pris"></span><br>
+            <span class="data-langbeskrivelse"></span><br><br>
+            <span class="data-pris"></span><br>
             <span class="data-kategori"></span><br>
         </article>
         </section>
@@ -96,9 +142,13 @@
                 dest.querySelector("h2").textContent = ret.navn;
                 dest.querySelector("img").src = "imgs/medium/" + ret.billede + "-md.jpg";
                 dest.querySelector(".data-langbeskrivelse").textContent = ret.langbeskrivelse;
-                dest.querySelector(".data-pris").textContent = ret.pris + ",-";
+                dest.querySelector(".data-pris").textContent = "Pris: " + ret.pris + ",-";
                 }
             })
+        }
+
+        function tilbage(){
+            window.history.back();
         }
     </script>
 

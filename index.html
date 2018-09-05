@@ -5,14 +5,53 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:300i,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
     <style>
         body {
             background-color: rgb(240, 240, 240);
         }
 
         article {
-            padding: 1em;
+            padding: 5px;
             background-color: white;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: coral;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-bottom: 2%;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+                button:hover {
+            background-color: chocolate;
+        }
+
+        header {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        h1{
+            font-family: 'Dancing Script', cursive;
+            color: coral;
+            text-align: center;
+            font-size: 75px;
+        }
+
+        h2 {
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            letter-spacing: .5px;
         }
 
         .data-container article img {
@@ -23,6 +62,40 @@
             margin: 0 auto;
             display: grid;
         }
+
+        article:nth-child(2n) {
+            background-color: coral;
+
+        }
+
+        .modal-billede {
+            width: 70%;
+        }
+
+        .ret {
+            position: relative;
+        }
+
+        .data-pris {
+            position: absolute;
+            bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .data-navn {
+            position: absolute;
+            top: 5px;
+        }
+
+        .data-kortbeskrivelse {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            letter-spacing: .5px;
+        }
+
 
         @media screen and (min-width:580px) {
             .data-container {
@@ -37,14 +110,15 @@
 
 <body>
     <header>
-        <h1></h1>
+       <h1>Bistro Babushka</h1>
         <nav>
-            <button class="menu-item" data-kategori="alle">alle</button>
+            <button class="menu-item" data-kategori="Menu">Menu</button>
             <button class="menu-item" data-kategori="forretter">forretter</button>
             <button class="menu-item" data-kategori="hovedretter">hovedretter</button>
             <button class="menu-item" data-kategori="desserter">desserter</button>
             <button class="menu-item" data-kategori="drikkevarer">drikkevarer</button>
         </nav>
+        <h2></h2>
     </header>
 
     <main class="container">
@@ -52,18 +126,18 @@
     </main>
     <template class="data-template">
         <article class="ret">
-            <h2></h2>
             <img src="" alt=""><br>
+            <h2></h2>
             <a class="data-navn" href=""></a><br>
             <span class="data-kortbeskrivelse"></span><br>
-            pris: <span class="data-pris"></span><br>
+            <span class="data-pris"></span><br>
             <span class="data-kategori"></span><br>
         </article>
     </template>
 
     <script>
         let dest = document.querySelector(".data-container"),
-            retter, kategoriFilter = "alle";
+            retter, kategoriFilter = "Menu";
         document.addEventListener("DOMContentLoaded", hentJson);
 
         async function hentJson() {
@@ -85,9 +159,9 @@
         function visRetter() {
             let dest = document.querySelector(".data-container"),
                 temp = document.querySelector(".data-template");
-                document.querySelector("header h1").textContent = kategoriFilter;
+                document.querySelector("header h2").textContent = kategoriFilter;
             retter.forEach(ret => {
-                if (ret.kategori==kategoriFilter || kategoriFilter=="alle"){
+                if (ret.kategori==kategoriFilter || kategoriFilter=="Menu"){
                 let klon = temp.cloneNode(true).content;
                 klon.querySelector("h2").textContent = ret.navn;
                 klon.querySelector("img").src = "imgs/small/" + ret.billede + "-sm.jpg";
@@ -95,7 +169,7 @@
                     window.location.href="indexSingle.html?id=" + ret.id;
                 })
                 klon.querySelector(".data-kortbeskrivelse").textContent = ret.kortbeskrivelse;
-                klon.querySelector(".data-pris").textContent = ret.pris + ",-";
+                klon.querySelector(".data-pris").textContent = "Pris: " + ret.pris + ",-";
                 dest.appendChild(klon);
                 }
             })
