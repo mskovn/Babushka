@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:300i,400" rel="stylesheet">
     <style>
+
         body {
             background-color: rgb(240, 240, 240);
-            margin: 0;
         }
 
         article {
@@ -18,6 +19,56 @@
 
         h2 {
             margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            letter-spacing: .5px;
+        }
+
+        #modal h2 {
+            padding-top: 15px;
+        }
+
+        #modal {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 1s;
+            background-color: rgba(0, 0, 0, .7);
+            top: 0;
+            z-index: 1;
+        }
+
+        .modal-beskrivelse {
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            letter-spacing: .5px;
+            padding: 10px;
+        }
+
+        .modal-pris {
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-size: 15px;
+            letter-spacing: 1px;
+            padding: 10px;
+        }
+
+        #modal-content {
+            width: 73vw;
+            margin: auto;
+            background-color: rgba(250, 2550, 250, 1);
+        }
+
+        #modal.vis {
+            display: block;
+            opacity: 1;
+            pointer-events: all;
+            transition: 0.5s;
         }
 
         .data-container article img {
@@ -40,11 +91,21 @@
         .data-pris {
             position: absolute;
             bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-size: 15px;
+            letter-spacing: 1px;
         }
 
         .data-navn {
             position: absolute;
             top: 5px;
+        }
+
+        .data-kortbeskrivelse {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            letter-spacing: .5px;
         }
 
         @media screen and (min-width:580px) {
@@ -57,38 +118,6 @@
 
         }
 
-        #modal {
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            text-align: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: 1s;
-            background-color: rgba(0, 0, 0, .7);
-            top: 0;
-        }
-
-        .modal-beskrivelse {
-            text-align: left;
-        }
-
-        .modal-pris {
-            text-align: left;
-        }
-
-        #modal-content {
-            width: 73vw;
-            margin: auto;
-            background-color: rgba(250, 2550, 250, 1);
-        }
-
-        #modal.vis {
-            display: block;
-            opacity: 1;
-            pointer-events: all;
-            transition: 0.5s;
-        }
     </style>
 </head>
 
