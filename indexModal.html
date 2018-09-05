@@ -12,8 +12,12 @@
         }
 
         article {
-            padding: 1em;
             background-color: white;
+            padding: 5px;
+        }
+
+        h2 {
+            margin-top: 5px;
         }
 
         .data-container article img {
@@ -29,11 +33,25 @@
             width: 70%;
         }
 
+        .ret {
+            position: relative;
+        }
+
+        .data-pris {
+            position: absolute;
+            bottom: 5px;
+        }
+
+        .data-navn {
+            position: absolute;
+            top: 5px;
+        }
+
         @media screen and (min-width:580px) {
             .data-container {
                 padding-left: 10%;
                 padding-right: 10%;
-                grid-gap: 5px;
+                grid-gap: 10px;
                 grid-template-columns: repeat(3, 1fr);
             }
 
@@ -101,12 +119,12 @@
     </main>
     <template class="data-template">
         <article class="ret">
+            <img src="" alt="">
             <h2></h2>
-            <img src="" alt=""><br>
-            <a class="data-navn" href=""></a><br>
-            <span class="data-kortbeskrivelse"></span><br>
-            pris: <span class="data-pris"></span><br>
-            <span class="data-kategori"></span><br>
+            <a class="data-navn" href=""></a>
+            <span class="data-kortbeskrivelse"></span><br><br><br>
+            <span class="data-pris"></span>
+            <span class="data-kategori"></span>
         </article>
     </template>
 
@@ -146,7 +164,7 @@
                         visModal(ret);
                     });
                     klon.querySelector(".data-kortbeskrivelse").textContent = ret.kortbeskrivelse;
-                    klon.querySelector(".data-pris").textContent = ret.pris + ",-";
+                    klon.querySelector(".data-pris").textContent = "Pris: " + ret.pris + ",-";
                     dest.appendChild(klon);
                 }
             })
